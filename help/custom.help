@@ -1,0 +1,33 @@
+{
+    "Description": "<pre class=\"ql-syntax\" spellcheck=\"false\">LIMScustom{api, method, parameters, headers, live}\n</pre><p><br></p><h3>RETURNS</h3><p><br></p><ul><li>It returns the status of the request, the response from the API, and the response code. <em><u>boolean</u></em>, <em><u>table</u></em> and <em><u>number</u></em></li></ul><p><br></p><h3>EXAMPLE</h3><p><br></p><p>This is an example custom method with the LIMS adapter. Where Lims is the adapter object returned from <a href=\"http://localhost:7654/@LIMSclient\" target=\"_blank\">LIMSclient</a>.</p><pre class=\"ql-syntax\" spellcheck=\"false\">Lims:custom{\n  method = 'post',\n  api = 'datarecord/Attachment',\n  parameters = Payload,\n  headers = Headers,\n  live = true\n}\n</pre>",
+    "Name": "LIMScustom",
+    "Parameters": [
+        {
+            "Description": "<p>Api endpoint to call. <em><u>string</u></em></p>",
+            "Name": "api",
+            "Required": true
+        },
+        {
+            "Description": "<p>Http method to use. Defaults to 'post' if not specified. <em><u>string</u></em></p>",
+            "Name": "method",
+            "Required": false
+        },
+        {
+            "Description": "<p>Parameters for the call. <em><u>table</u></em><span class=\"ql-cursor\">﻿﻿﻿</span></p>",
+            "Name": "parameters",
+            "Required": false
+        },
+        {
+            "Description": "<p>Headers for the call. <em><u>table</u></em><span class=\"ql-cursor\">﻿﻿﻿</span></p>",
+            "Name": "headers",
+            "Required": false
+        },
+        {
+            "Description": "<p>If true then the call will be made live in the editor. <em><u>boolean</u></em><u><span class=\"ql-cursor\">﻿﻿﻿</span></u></p>",
+            "Name": "live",
+            "Required": false
+        }
+    ],
+    "ParameterTable": true,
+    "SummaryLine": "Do a custom call."
+}

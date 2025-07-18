@@ -1,0 +1,23 @@
+{
+    "Description": "<pre class=\"ql-syntax\" spellcheck=\"false\">LIMSsendTable{record, table_name, live}\n</pre><p><br></p><h3>RETURNS</h3><ul><li>It returns the status of the request, the response from the API, and the response code. <em><u>boolean</u></em>, <em><u>table</u></em> and <em><u>number</u></em></li></ul><p><br></p><h3>EXAMPLE</h3><p>Where Lims is the adapter object returned from <a href=\"http://localhost:7654/@LIMSclient\" target=\"_blank\" style=\"color: rgb(37, 144, 205);\">LIMSclient</a>.</p><pre class=\"ql-syntax\" spellcheck=\"false\">Lims:sendTable{\n  record=Record, \n  table_name=TableName, \n  live=true\n}\n</pre>",
+    "Name": "LIMSsendTable",
+    "Parameters": [
+        {
+            "Description": "<p>Record table to send. <em><u>table</u></em></p>",
+            "Name": "record",
+            "Required": true
+        },
+        {
+            "Description": "<p>Logical LIMS data table name. <em><u>string</u></em></p>",
+            "Name": "table_name",
+            "Required": true
+        },
+        {
+            "Description": "<p>If true then the call will be made live in the editor. <em><u>boolean</u></em></p>",
+            "Name": "live",
+            "Required": false
+        }
+    ],
+    "ParameterTable": true,
+    "SummaryLine": "Posts mapped record to LIMS system."
+}

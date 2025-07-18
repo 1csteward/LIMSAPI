@@ -1,0 +1,38 @@
+{
+    "Description": "<pre class=\"ql-syntax\" spellcheck=\"false\">RETRYcall{func [, arg1, retry, pause, funcname, errorfunc]}\n</pre><p><br></p><p>The purpose of RETRYcall is to implement retry logic in interfaces that handle resources which may not always be available, e.g., databases, webservices etc.   Here is an example of calling the function DoInsert with 10 retries and a pause of five seconds between each call:</p><p><br></p><p>If the function throws an error this module logs an informational message containing the error details, then it sleeps and then retries the operation after the specified \"pause\" time (in seconds).</p><p>By default if the function returns&nbsp;<strong>false</strong>&nbsp;it is treated as a \"fatal\" error and the error will be re-thrown which will (usually) stop the channel.</p><p><strong>Note</strong>: You can also customize error handling by using the&nbsp;<strong>errorfunc</strong>&nbsp;parameter to supply a custom error handling function.</p><p><br></p><p>Any number of functions arguments are supported, in the form: arg1, arg2,... argN.</p><p>The function returns what the function called would return or a single ERROR return when an error occurs.</p><p>After those arguments the function returns a string with Informational message describing the retry count and pause delay.</p><p>If nothing is returned from the function then the informational message becomes the first (and only) return.</p><p><br></p><p><strong>EXAMPLE</strong></p><p><br></p><pre class=\"ql-syntax\" spellcheck=\"false\">local R, Message = RETRYcall{func=DoInsert,arg1=T,arg2=D, retry=10, pause=5}\n</pre><p><br></p>",
+    "Name": "RETRYcall",
+    "Parameters": [
+        {
+            "Description": "<p>The function to call. <em><u>function</u></em></p>",
+            "Name": "func",
+            "Required": true
+        },
+        {
+            "Description": "<p>One or more arguments to the function, in the form: arg1, arg2,... argN. <em><u>any type</u></em></p>",
+            "Name": "arg1",
+            "Required": false
+        },
+        {
+            "Description": "<p>Count of times to retry (default = 100). <em><u>integer</u></em></p>",
+            "Name": "retry",
+            "Required": false
+        },
+        {
+            "Description": "<p>Delay between retries in seconds (default = 10).&nbsp;<em><u>integer</u></em></p>",
+            "Name": "pause",
+            "Required": false
+        },
+        {
+            "Description": "<p>Name of the function (informational only for errors and logging).&nbsp;<em><u>string</u></em></p>",
+            "Name": "funcname",
+            "Required": false
+        },
+        {
+            "Description": "<p>A custom error handling function.&nbsp;<em><u>function</u></em></p>",
+            "Name": "errorfunc",
+            "Required": false
+        }
+    ],
+    "ParameterTable": true,
+    "SummaryLine": "Retries a function, using the specified number of retries and pause time in seconds."
+}

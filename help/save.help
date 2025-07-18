@@ -1,0 +1,23 @@
+{
+    "Description": "<p>This function encrypts and saves a password to the specified file located in the configuration directory of Iguana.</p><p><u><span class=\"ql-cursor\">﻿﻿﻿﻿﻿﻿﻿﻿﻿</span></u></p><pre class=\"ql-syntax\" spellcheck=\"false\">-- Save the config file - but do not leave this line in the script\nLIMSencrypt.save{password='my password', config='acmeapp', key='skKddd223kdS'}\n-- Load the password previously saved to the configuration file\nlocal Password = LIMSencrypt.load{config='acmeapp', key='skKddd223kdS'}\n</pre>",
+    "Name": "LIMSencrypt.save",
+    "Parameters": [
+        {
+            "Description": "<p>The password to save in the file. <u>string</u></p>",
+            "Name": "password",
+            "Required": true
+        },
+        {
+            "Description": "<p>Name of the configuration file to save to. <u>string</u></p>",
+            "Name": "config",
+            "Required": true
+        },
+        {
+            "Description": "<p>Key used to encrypt the saved password. <u>string</u></p>",
+            "Name": "key",
+            "Required": true
+        }
+    ],
+    "ParameterTable": true,
+    "SummaryLine": "Encrypt and save a password to a file."
+}

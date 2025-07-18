@@ -1,0 +1,53 @@
+{
+    "Description": "<pre class=\"ql-syntax\" spellcheck=\"false\">LIMSclient{ClientId, ClientSecret, LimsBaseUrl, TokenUrl, Scope, AppGuid, Timeout, RetryMax, RetryPause}\n</pre><p><br></p><h3>RETURNS</h3><ul><li>Returns the LIMS adapter object. <em><u>object</u></em></li></ul><p><br></p><h3>EXAMPLE</h3><p><br></p><pre class=\"ql-syntax\" spellcheck=\"false\">local Config = component.fields()&nbsp; \nlocal Lims = LIMSclient{\n&nbsp; &nbsp; &nbsp; ClientId&nbsp; &nbsp; &nbsp;= Config.ClientId,\n&nbsp; &nbsp; &nbsp; ClientSecret = Config.ClientSecret,\n&nbsp; &nbsp; &nbsp; LimsBaseUrl&nbsp; = Config.LimsBaseUrl,\n&nbsp; &nbsp; &nbsp; TokenUrl&nbsp; &nbsp; &nbsp;= Config.TokenUrl,\n&nbsp; &nbsp; &nbsp; Scope&nbsp; &nbsp; &nbsp; &nbsp; = Config.Scope,\n&nbsp; &nbsp; &nbsp; AppGuid&nbsp; &nbsp; &nbsp; = Config.AppGuid,\n&nbsp; &nbsp; &nbsp; Timeout&nbsp; &nbsp; &nbsp; = Config.Timeout,\n&nbsp; &nbsp; &nbsp; RetryMax&nbsp; &nbsp; &nbsp;= Config.RetryMax,\n&nbsp; &nbsp; &nbsp; RetryPause&nbsp; &nbsp;= Config.RetryPause\n}\n</pre>",
+    "Name": "LIMSclient",
+    "Parameters": [
+        {
+            "Description": "<p>Client id. <em><u>string</u></em><span class=\"ql-cursor\">﻿</span></p>",
+            "Name": "ClientId",
+            "Required": true
+        },
+        {
+            "Description": "<p>Client secret. <em><u>string</u></em></p>",
+            "Name": "ClientSecret",
+            "Required": true
+        },
+        {
+            "Description": "<p>Base url for LIMS server. <em><u>string</u></em></p>",
+            "Name": "LimsBaseUrl",
+            "Required": true
+        },
+        {
+            "Description": "<p>Microsoft OAuth2.0 server url. <em><u>string</u></em></p>",
+            "Name": "TokenUrl",
+            "Required": true
+        },
+        {
+            "Description": "<p>Scope. <em><u>string</u></em></p>",
+            "Name": "Scope",
+            "Required": true
+        },
+        {
+            "Description": "<p>App guid. <em><u>string</u></em></p>",
+            "Name": "AppGuid",
+            "Required": false
+        },
+        {
+            "Description": "<p>HTTP timeout. If not supplied, defaults to 10 seconds. <em><u>number</u></em></p>",
+            "Name": "Timeout",
+            "Required": false
+        },
+        {
+            "Description": "<p>Maximum number of retries. If not supplied, defaults to 15. <em><u>number</u></em></p>",
+            "Name": "RetryMax",
+            "Required": false
+        },
+        {
+            "Description": "<p>Pause between retries. if not supplied, defaults to 5 seconds. <em><u>number</u></em></p>",
+            "Name": "RetryPause",
+            "Required": false
+        }
+    ],
+    "ParameterTable": true,
+    "SummaryLine": "Create a LIMS adapter object."
+}

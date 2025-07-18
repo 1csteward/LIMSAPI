@@ -1,0 +1,18 @@
+{
+    "Description": "<pre class=\"ql-syntax\" spellcheck=\"false\">LIMSdownloadAttachmentFile{record_id, live}\n</pre><p><br></p><h3>RETURNS</h3><ul><li>It returns the status of the request, the response from the API, and the response code. <em><u>boolean</u></em>, <em><u>table</u></em> and <em><u>number</u></em></li></ul><p><br></p><h3>EXAMPLE</h3><p>Where Lims is the adapter object returned from <a href=\"http://localhost:7654/@LIMSclient\" target=\"_blank\" style=\"color: rgb(37, 144, 205);\">LIMSclient</a>.</p><pre class=\"ql-syntax\" spellcheck=\"false\">Lims:downloadAttachmentFile{\n  record_id = att.RecordId, \n  live=true\n}\n</pre><p><br></p>",
+    "Name": "LIMSdownloadAttachmentFile",
+    "Parameters": [
+        {
+            "Description": "<p>Id of the record. <em><u>string</u></em></p>",
+            "Name": "record_id",
+            "Required": true
+        },
+        {
+            "Description": "<p>If true then the call will be made live in the editor. <em><u>boolean</u></em></p>",
+            "Name": "live",
+            "Required": false
+        }
+    ],
+    "ParameterTable": true,
+    "SummaryLine": "Download raw file data for attachment"
+}

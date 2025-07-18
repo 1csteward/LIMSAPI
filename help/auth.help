@@ -1,0 +1,7 @@
+{
+    "Description": "<pre class=\"ql-syntax\" spellcheck=\"false\">S:auth()\n</pre><p>This is an authentication method on the LIMS adapter that can be called from within the LIMScustom function. It sends an authentication request to the Microsoft authentication server and stores the resulting token and expiry time within the LIMS adapter object and in an encrypted file.</p>",
+    "Name": "LIMSauth",
+    "Parameters": null,
+    "ParameterTable": false,
+    "SummaryLine": "Function for retrieving/updating the LIMS access token."
+}

@@ -1,0 +1,28 @@
+{
+    "Description": "<pre class=\"ql-syntax\" spellcheck=\"false\">LIMSuploadAttachmentFile{record_id, file_name, attachment, live}\n</pre><p><br></p><h3>RETURNS</h3><ul><li>It returns the status of the request, the response from the API, and the response code. <em><u>boolean</u></em>, <em><u>table</u></em> and <em><u>number</u></em></li></ul><p><br></p><h3>EXAMPLE</h3><p>Where Lims is the adapter object returned from <a href=\"http://localhost:7654/@LIMSclient\" target=\"_blank\" style=\"color: rgb(37, 144, 205);\">LIMSclient</a>.</p><pre class=\"ql-syntax\" spellcheck=\"false\">Lims:uploadAttachmentFile{\n  record_id= Attachment.recordId,\n  file_name=FileName,\n  attachment=EmbeddedPdf,\n  live=true\n}\n</pre>",
+    "Name": "LIMSuploadAttachmentFile",
+    "Parameters": [
+        {
+            "Description": "<p>Id of the created attachment record. <em><u>string</u></em></p>",
+            "Name": "record_id",
+            "Required": true
+        },
+        {
+            "Description": "<p>File name for attachment. <em><u>string</u></em></p>",
+            "Name": "file_name",
+            "Required": true
+        },
+        {
+            "Description": "<p>Base64-encoded content of the PDF. <em><u>string</u></em></p>",
+            "Name": "attachment",
+            "Required": true
+        },
+        {
+            "Description": "<p>If true then the call will be made live in the editor. <em><u>boolean</u></em></p>",
+            "Name": "live",
+            "Required": false
+        }
+    ],
+    "ParameterTable": true,
+    "SummaryLine": "Uploads a decoded base64 PDF to an existing LIMS attachment record."
+}
