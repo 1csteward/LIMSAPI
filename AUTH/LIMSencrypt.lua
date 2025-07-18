@@ -62,11 +62,11 @@ end
 
 -- =============================================================================
 -- Function: LIMSencrypt.load
--- Purpose : Decrypt and return the stored password/token
--- Input   :
+-- Purpose: Decrypt and return the stored password/token
+-- Input:
 --   T.config (string) - Path to config file
 --   T.key    (string) - Secret key used in encryption
--- Returns :
+-- Returns:
 --   - Decrypted password/token (string)
 --   - "No password file saved" (string) if config file not found
 -- =============================================================================
