@@ -1,6 +1,6 @@
 -- =============================================================================
 -- LIMSauth.lua
--- Author: Stephen Piccone
+-- Author: Conor Steward/Stephen Piccone
 -- Date: 07/17/25
 --
 -- Purpose:

@@ -22,7 +22,7 @@
 --   LIMScustom (function) - Callable API executor
 -- =============================================================================
 
-require "LIMS.retry.LIMSretry"
+local LIMSretry = require "LIMS.retry.LIMSretry"
 
 -- =============================================================================
 -- Function: LIMSloadParameters
@@ -46,11 +46,11 @@ end
 
 -- =============================================================================
 -- Function: LIMSparseResponse
--- Purpose : Parse JSON response and determine success/failure
--- Input   : 
+-- Purpose: Parse JSON response and determine success/failure
+-- Input: 
 --   R     - Raw response string
 --   Code  - HTTP status code
--- Output  :
+-- Output:
 --   success (bool), parsed JSON (table or string), HTTP code
 -- Behavior:
 --   - Attempts to parse JSON if not in error list

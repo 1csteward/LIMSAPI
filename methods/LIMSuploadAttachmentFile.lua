@@ -16,10 +16,10 @@
 --     - Uses the general-purpose `S:custom()` function to transmit the file
 --
 -- Input (T):
---   - T.attachment : Base64-encoded PDF content
---   - T.record_id  : Record ID of the previously created Attachment
---   - T.file_name  : File name (e.g., "results.pdf")
---   - T.live       : Boolean flag for live/test execution
+--   - T.attachment: Base64-encoded PDF content
+--   - T.record_id: Record ID of the previously created Attachment
+--   - T.file_name: File name (e.g., "results.pdf")
+--   - T.live: Boolean flag for live/test execution
 --
 -- Returns:
 --   - Result of S:custom() (true/false, response string or object, HTTP code)
@@ -30,7 +30,7 @@ local function LIMSuploadAttachmentFile(S,T)
    local PdfBinary = filter.base64.dec(T.attachment)
 
    -- Construct full endpoint using record ID and file name
-   local Api = 'datarecord/attachment/Attachment/'..T.record_id..'/'..T.file_name
+   local Api = '/datarecord/attachment/Attachment/'..T.record_id..'/'..T.file_name
 
    -- Set headers for binary upload
    local Headers = {}

@@ -49,8 +49,8 @@ end
 
 -- =============================================================================
 -- Function: SaveFile
--- Purpose : Write string content to file
--- Input   :
+-- Purpose: Write string content to file
+-- Input:
 --   FileName (string) - Path to save file
 --   Content  (string) - Content to write
 -- =============================================================================

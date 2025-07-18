@@ -15,9 +15,9 @@
 --     - Invokes the LIMSclient:custom() method to send the request
 --
 -- Input (T):
---   - T.parent_record : Table with one entry containing RecordId (eRequest)
---   - T.file_name     : String, name of the file to associate
---   - T.live          : Boolean, true for live mode or false/test
+--   - T.parent_record: Table with one entry containing RecordId (eRequest)
+--   - T.file_name: String, name of the file to associate
+--   - T.live: Boolean, true for live mode or false/test
 --
 -- Returns:
 --   - API response from LIMSclient:custom (true/false, response, code)

@@ -15,9 +15,9 @@
 --     - Delegates the request to the LIMSclient:custom method
 --
 -- Input (T):
---   - T.table_name : String with table name (may include colon suffix)
---   - T.record     : Record payload (table or array)
---   - T.live       : Boolean flag for live/test mode
+--   - T.table_name: String with table name (may include colon suffix)
+--   - T.record: Record payload (table or array)
+--   - T.live: Boolean flag for live/test mode
 --
 -- Returns:
 --   - Result of S:custom() (true/false, response table or string, HTTP code)
@@ -28,7 +28,7 @@ local function LIMSsendTable(S,T)
    local BaseTableName = T.table_name:match("^(.-):") or T.table_name
 
    -- Construct API path for posting records to the correct table
-   local Api = 'datarecordlist/fields/'..BaseTableName
+   local Api = '/datarecordlist/fields/'..BaseTableName
 
    -- Set required HTTP headers for JSON format
    local Headers = {}
