@@ -1,25 +1,54 @@
--- The retry module
--- Copyright (c) 2011-2023 iNTERFACEWARE Inc. ALL RIGHTS RESERVED
--- iNTERFACEWARE permits you to use, modify, and distribute this file in accordance
--- with the terms of the iNTERFACEWARE license agreement accompanying the software
--- in which it is used.
+-- =============================================================================
+-- retry.lua
+-- Author: iNTERFACEWARE Inc.
+-- Date: 07/17/25
 --
+-- Purpose:
+--   Generic retry handler for retrying a function call multiple times
+--   with a configurable delay between attempts.
+--
+--   Commonly used in integrations that interact with unstable endpoints,
+--   such as HTTP APIs or network services that may fail intermittently.
+--
+--   This module:
+--     - Supports configurable retry count and pause duration
+--     - Accepts variadic arguments using arg1, arg2, ..., argN
+--     - Provides hooks for custom error evaluation
+--     - Logs retry events and updates Iguana status lights/messages
+--     - Returns early if successful; throws an error after max retries
+--
+-- See:
+--   https://interfaceware.atlassian.net/wiki/spaces/IXB/pages/2713911370/Retry+Library
+--
+-- License:
+--   Copyright (c) 2011–2023 iNTERFACEWARE Inc. ALL RIGHTS RESERVED.
+--   Permitted for use under the iNTERFACEWARE license agreement.
+-- =============================================================================
 
--- See https://interfaceware.atlassian.net/wiki/spaces/IXB/pages/2713911370/Retry+Library
- 
 -- customize the (generic) error messages used by retry() if desired
 local RETRIES_FAILED_MESSAGE = 'Retries completed - was unable to recover from connection error.'
 local FATAL_ERROR_MESSAGE    = 'Stopping channel - fatal error, function returned false. Function name: '
 local RECOVERED_MESSAGE      = 'Recovered from error, connection is now working. Function name: '
- 
-  
+
+-- =============================================================================
+-- Function: sleep
+-- Purpose : Pause execution (in seconds), only when not in test mode
+-- Input   : S (number) - seconds to sleep
+-- =============================================================================
 local function sleep(S)
    if not iguana.isTest() then
       util.sleep(S*1000)
    end
 end
- 
--- hard-coded to allow "argN" params (e.g., arg1, arg2,...argN)
+
+-- =============================================================================
+-- Function: checkParam
+-- Purpose: Validate retry() input table, allow argN dynamic keys
+-- Input:
+--   T     - Table of parameters
+--   List  - Table of allowed keys
+--   Usage - Usage string for error display (unused here)
+-- =============================================================================
 local function checkParam(T, List, Usage)
    if type(T) ~= 'table' then
       error(Usage,3)
@@ -34,8 +63,13 @@ local function checkParam(T, List, Usage)
       end
    end
 end
- 
--- hard-coded for "argN" params (e.g., arg1, arg2,...argN)
+
+-- =============================================================================
+-- Function: getArgs
+-- Purpose: Extract sequential function arguments from keys arg1, arg2, ...
+-- Input: P - parameter table
+-- Returns: args (array) - values in numeric order
+-- =============================================================================
 local function getArgs(P)
    local args = {}
    for k,v in pairs(P) do
@@ -45,14 +79,25 @@ local function getArgs(P)
    end
    return args
 end
- 
--- This function will call with a retry sequence - default is 100 times with a pause of 10 seconds between retries
-function RETRYcall(P)--F, A, RetryCount, Delay)
+
+-- =============================================================================
+-- Function: LIMSretry
+-- Purpose: Executes a function with retry logic
+-- Input: 
+--   P.func      - Function to execute
+--   P.argN      - Arguments to pass to the function
+--   P.retry     - Number of retry attempts (default: 100)
+--   P.pause     - Delay between retries (default: 10 seconds)
+--   P.funcname  - Optional label for logging
+--   P.errorfunc - Optional function to determine success from result
+-- Returns : Result of P.func or throws an error on failure
+-- =============================================================================
+function LIMSretry(P)
    checkParam(P, {func=0, retry=0, pause=0, funcname=0, errorfunc=0}, Usage)
    if type(P.func) ~= 'function' then
       error('The "func" argument is not a function type, or it is missing (nil).', 2)
    end 
-   
+
    local RetryCount = P.retry or 100
    local Delay = P.pause or 10
    local Fname = P.funcname or 'not specified'
@@ -61,7 +106,7 @@ function RETRYcall(P)--F, A, RetryCount, Delay)
    local Info = 'Will retry '..RetryCount..' times with pause of '..Delay..' seconds.'
    local Success, ErrMsgOrReturnCode
    local Args = getArgs(P)
-   
+
    if iguana.isTest() then RetryCount = 2 end 
    for i =1, RetryCount do
       local R = {pcall(Func, unpack(Args))}
@@ -103,11 +148,10 @@ function RETRYcall(P)--F, A, RetryCount, Delay)
          error('Component is being forcefully stopped. Stopping retries.')         
       end
    end
-   
+
    -- stop channel if retries are unsuccessful
    ui.setStatusMessage{data=RETRIES_FAILED_MESSAGE}
    error(RETRIES_FAILED_MESSAGE..' Function: '..Fname..'(). Stopping channel.\n'..tostring(ErrMsgOrReturnCode)) 
 end 
 
-
-return RETRYcall
+return retry
