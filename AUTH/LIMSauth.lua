@@ -47,14 +47,19 @@ local function LIMSauth(S)
       ["Content-Type"] = 'application/x-www-form-urlencoded'
    }
 
-   -- Form bodys for client credentials flow
-   local Body = string.format("grant_type=client_credentials&scope=%s&client_id=%s&client_secret=%s", tostring(S.scope), tostring(S.client_id), tostring(S.client_secret))
-
+   -- Form parameters for client credentials flow
+   local params = {
+      ["grant_type"] = 'client_credentials',
+      ["scope"] = S.scope,
+      ["client_id"] = S.client_id,
+      ["client_secret"] = S.client_secret
+   }
    -- Perform POST request to obtain token
    local Response, Code, H = net.http.post{
       url = TokenUrl,
       headers = Headers,
-      body = Body
+      parameters = params,
+      live=true
    }
 
    -- If successful (HTTP 200), parse and store the token
