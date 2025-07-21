@@ -112,7 +112,7 @@ function LIMScustom(S,T)
    HttpInput.url = S.base_url..T.api
    HttpInput.headers = T.headers or {}
    HttpInput.headers.Authorization = 'Bearer ' .. S.Key
-   HttpInput.live = T.Live
+   HttpInput.live = T.live
    HttpInput.timeout = S.timeout
    LIMSloadParameters{method = Method, inputs = HttpInput, params = T.parameters}
    trace(HttpInput)
