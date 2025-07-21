@@ -154,4 +154,4 @@ function LIMSretry(P)
    error(RETRIES_FAILED_MESSAGE..' Function: '..Fname..'(). Stopping channel.\n'..tostring(ErrMsgOrReturnCode)) 
 end 
 
-return retry
+return LIMSretry
