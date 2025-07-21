@@ -72,7 +72,7 @@ end
 -- =============================================================================
 function LIMSencrypt.load(T)
    local Config = T.config
-   local Key = T.key
+   local Key = T.Key
 
    local Data = LoadFile(Config)
    if not Data then

@@ -10,17 +10,17 @@
 --
 --   This function:
 --     - Performs a POST request to the LIMS OAuth2 token endpoint.
---     - Authenticates using Basic Auth with client_id/client_secret.
+--     - Authenticates using Basic Auth with ClientId/ClientSecret.
 --     - Requests a token with specified scope.
 --     - Caches the token with an expiry time using local encryption.
 --
 -- Dependencies:
 --   - LIMSencrypt.lua: Handles encrypted storage of the token.
 --   - Iguana config fields must include:
---       * token_url
---       * client_id
---       * client_secret
---       * scope
+--       * TokenUrl
+--       * ClientId
+--       * clientSecret
+--       * Scope
 --
 -- Returns:
 --   - OAuth2 access token (string) if request is successful.
@@ -32,10 +32,10 @@ require "LIMS.auth.LIMSencrypt"
 
 -- =============================================================================
 -- Function: LIMSauth
--- Purpose : Authenticate using OAuth2 and return access token
--- Input   :
+-- Purpose: Authenticate using OAuth2 and return access token
+-- Input:
 --   S (table) - Config table containing token_url, client_id, client_secret, scope
--- Returns :
+-- Returns:
 --   string - OAuth2 access token if successful, otherwise nil
 -- =============================================================================
 local function LIMSauth(S)
@@ -44,22 +44,17 @@ local function LIMSauth(S)
 
    -- Basic Auth header with base64-encoded client credentials
    local Headers = {
-      ["Authorization"] = 'Basic '.. filter.base64.enc(S.client_id..':'..S.client_secret),
       ["Content-Type"] = 'application/x-www-form-urlencoded'
    }
 
-   -- Form parameters for client credentials flow
-   local params = {
-      ["grant_type"] = 'client_credentials',
-      ["scope"] = S.scope
-   }
+   -- Form bodys for client credentials flow
+   local Body = string.format("grant_type=client_credentials&scope=%s&client_id=%s&client_secret=%s", tostring(S.scope), tostring(S.client_id), tostring(S.client_secret))
 
    -- Perform POST request to obtain token
    local Response, Code, H = net.http.post{
-      url       = TokenUrl,
-      headers   = Headers,
-      parameters= params,
-      live      = true
+      url = TokenUrl,
+      headers = Headers,
+      body = Body
    }
 
    -- If successful (HTTP 200), parse and store the token
@@ -68,8 +63,8 @@ local function LIMSauth(S)
       local TokenDetails  = {}
       TokenDetails.token  = Auth.access_token
       TokenDetails.expiry = os.time() + Auth.expires_in
-      S.key               = TokenDetails.token
-      S.key_expiry        = TokenDetails.expiry
+      S.Key               = TokenDetails.token
+      S.KeyExpiry        = TokenDetails.expiry
 
       -- Save token using encrypted storage
       LIMSencrypt.save{

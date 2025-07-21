@@ -100,7 +100,7 @@ end
 -- =============================================================================
 function LIMScustom(S,T)
    -- Check if OAuth token is saved, and not expired.
-   if S.key == nil or tonumber(S.key_expiry) < os.time() then
+   if S.Key == nil or tonumber(S.KeyExpiry) < os.time() then
       iguana.logInfo('OAuth token is expired or does not exist. Fetching token.')
       S:auth()
       iguana.logInfo('OAuth token fetched successfully.')
@@ -111,9 +111,8 @@ function LIMScustom(S,T)
    local HttpInput = {}
    HttpInput.url = S.base_url..T.api
    HttpInput.headers = T.headers or {}
-   -- TODO: Update when auth is figured out
-   HttpInput.headers.Authorization = 'Bearer '..S.key
-   HttpInput.live = T.live
+   HttpInput.headers.Authorization = 'Bearer ' .. S.Key
+   HttpInput.live = T.Live
    HttpInput.timeout = S.timeout
    LIMSloadParameters{method = Method, inputs = HttpInput, params = T.parameters}
    trace(HttpInput)

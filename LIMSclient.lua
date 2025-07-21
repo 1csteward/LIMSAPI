@@ -72,13 +72,13 @@ function LIMSclient(T)
    -- Load previously cached encrypted token (if present)
    local EncryptedDetails = LIMSencrypt.load{
       config = component.id()..'.xml',
-      key    = 'oaibdsfpbreundansp21342sdfp4'
+      Key    = 'oaibdsfpbreundansp21342sdfp4'
    }
 
    if EncryptedDetails ~= 'No password file saved' then
       local KeyDetails  = json.parse{data=EncryptedDetails}
-      S.key             = KeyDetails.token
-      S.key_expiry      = KeyDetails.expiry
+      S.Key             = KeyDetails.token
+      S.KeyExpiry      = KeyDetails.expiry
    end
 
    return S
