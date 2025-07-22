@@ -32,8 +32,8 @@ local RECOVERED_MESSAGE      = 'Recovered from error, connection is now working.
 
 -- =============================================================================
 -- Function: sleep
--- Purpose : Pause execution (in seconds), only when not in test mode
--- Input   : S (number) - seconds to sleep
+-- Purpose: Pause execution (in seconds), only when not in test mode
+-- Input: S (number) - seconds to sleep
 -- =============================================================================
 local function sleep(S)
    if not iguana.isTest() then
