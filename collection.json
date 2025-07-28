@@ -1,0 +1,12 @@
+{
+    "collection": {
+        "ssh://git@github.com/1csteward/LIMSAPI.git": {
+            "description": "Comprehensive LIMS API for POST & GET.",
+            "git": "ssh://git@github.com/1csteward/LIMSAPI.git",
+            "name": "LIMSAPI",
+            "type": "library"
+        }
+    },
+    "description": "",
+    "name": "Castle Custom Libraries"
+}
